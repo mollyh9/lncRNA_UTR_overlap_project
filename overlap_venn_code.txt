@@ -1,0 +1,42 @@
+myoverlapfile = open('/content/FGueganMnew.gtf')
+
+count3 = 0
+
+for line3 in myoverlapfile:
+  #print(line3)
+  count3+=1
+
+print(count3)
+
+myoverlapfile = open('/content/FGueganMnew.gtf')
+myfiletri = open('/content/TriTrypDB-54_TbruceiTREU927MM.gff')
+myfilefg = open('/content/FGueganM.gtf')
+
+
+count4 = 0
+for line4 in myfiletri:
+  #print(line3)
+  count4+=1
+
+print(count4)
+
+myfilefg = open('/content/FGueganM.gtf')
+
+
+count5 = 0
+for line5 in myfilefg:
+  #print(line3)
+  count5+=1
+
+print(count5)
+
+pip install matplotlib-venn
+
+from matplotlib import pyplot as plt
+import numpy as np
+from matplotlib_venn import venn2
+plt.figure(figsize=(8,8))
+venn2(subsets = (9659-1067, 1931-1067, 1067), set_labels = ('Tritryp', 'lncRNA'))
+plt.title("Sample Venn diagram")
+plt.savefig('venn.svg')
+

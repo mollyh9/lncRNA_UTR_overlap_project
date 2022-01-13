@@ -1,0 +1,55 @@
+fiveprimefile = open('/content/TriTrypDB-54_TbruceiTREU927_5prime.gff')
+lncRNAoverlap_5prime = open('/content/FGuegan5prime.gtf', 'w')
+#lncrna_overlap = open('/content/FGueganMnew.gtf', 'w')
+
+count=0
+for line in fiveprimefile:
+  if line == '\n':
+    #print('Empty line: {}'.format(threepline))
+    continue
+
+
+  count+=1
+  linelist = line.split('\t')
+  genestart = int(linelist[1])
+  geneend = int(linelist[2])
+  chromid = linelist[0].strip()
+  geneid = linelist[3].strip()
+  #print(1, geneend - genestart, chromid, geneid)
+  lncRNA_id = open('/content/FGueganM.gtf')
+  count2=0
+
+  myresult_5prime = []
+  for line2 in lncRNA_id:
+    #print('second file',line2)
+    #count2+=1
+    linelist2 = line2.split('\t')
+    genestart2 = int(linelist2[1])
+    geneend2 = int(linelist2[2])
+    chromid2 = linelist2[0].strip()
+    ksid = linelist2[3].strip()
+    
+    if chromid == chromid2:
+
+  
+      if genestart <= geneend2 <= geneend or genestart <= genestart2 <= geneend:
+        #print(4, geneid, ksid)
+        myresult = geneid + ' ' + ksid 
+        myresult_5prime.append(myresult)
+        #print(1, myresult)
+        count2+=1
+  #print(count2)
+
+      #if (genestart >= genestart2) and (geneend2 >= geneend):
+        #print(5, geneid, ksid)
+        #myresult2 = geneid + ' ' + ksid
+        #myresultoverlap.append(myresult2)
+        #print(2, myresult2)
+
+        
+  if len(myresult_5prime) > 0:
+    print(3, myresult_5prime)
+    lncRNAoverlap_5prime.write(' : '.join(myresult_5prime)+'\n')
+
+
+lncRNAoverlap_5prime.close()

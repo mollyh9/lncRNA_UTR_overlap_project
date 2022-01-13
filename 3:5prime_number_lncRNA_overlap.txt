@@ -1,0 +1,87 @@
+lncRNAoverlap_3prime = open('/content/FGuegan3primeswappedwords.gtf')
+#lncrna_overlap = open('/content/FGueganMnew.gtf', 'w')
+
+threeprimeoverlap_dict = {}
+countlncRNA=0
+for line in lncRNAoverlap_3prime:
+  #for myitem in linelist:
+    #if 'Parent=' in myitem:
+      #continue
+  linelist = line.split(' ')
+
+  #ksID = linelist[0].strip()
+  geneID = linelist[1].strip()
+  #print(linelist)
+  #if count == 50:
+    #break
+  count_geneID = line.count(geneID)
+
+  #print(line.strip(), geneID, count_geneID)
+  threeprimeoverlap_dict[geneID] = count_geneID
+
+  #for myitem in linelist:
+    #if 'KS' in myitem:
+      #countlncRNA+=1
+      #threeprimeoverlap_dict[''] = {myitem:countlncRNA}
+      
+#threeprimeoverlap_dict['Tb927.4.2180']
+threeprimeoverlap_dict
+#print(countlncRNA)
+
+lncRNAoverlap_5prime = open('/content/FGuegan5prime.gtf')
+#lncrna_overlap = open('/content/FGueganMnew.gtf', 'w')
+
+fiveprimeoverlap_dict = {}
+countlncRNA5=0
+for line in lncRNAoverlap_5prime:
+  #for myitem in linelist:
+    #if 'Parent=' in myitem:
+      #continue
+  linelist = line.split(' ')
+
+  #ksID = linelist[0].strip()
+  geneID = linelist[0].strip()
+  #print(linelist)
+  #if count == 50:
+    #break
+  count_geneID5 = line.count(geneID)
+
+  #print(line.strip(), geneID, count_geneID)
+  fiveprimeoverlap_dict[geneID] = count_geneID5
+
+  #for myitem in linelist:
+    #if 'KS' in myitem:
+      #countlncRNA+=1
+      #threeprimeoverlap_dict[''] = {myitem:countlncRNA}
+      
+#threeprimeoverlap_dict['Tb927.4.2180']
+fiveprimeoverlap_dict
+
+from collections import Counter
+
+fiveprime = fiveprimeoverlap_dict
+
+res = Counter(fiveprime.values())
+
+print(res)
+
+from collections import Counter
+
+common_gene = dict()
+
+for key in threeprimeoverlap_dict:
+  if (key in fiveprimeoverlap_dict and threeprimeoverlap_dict[key] == fiveprimeoverlap_dict[key]):
+    common_gene[key] = threeprimeoverlap_dict[key]
+    
+counting_common = Counter(common_gene.values())
+
+print(common_gene)
+print(counting_common)
+
+common_gene = dict()
+
+for key in threeprimeoverlap_dict:
+  if (key in fiveprimeoverlap_dict and threeprimeoverlap_dict[key] == fiveprimeoverlap_dict[key]):
+    common_gene[key] = threeprimeoverlap_dict[key]
+
+print(common_gene)

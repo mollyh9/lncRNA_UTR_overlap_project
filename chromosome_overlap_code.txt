@@ -1,0 +1,7 @@
+lncrna_overlapc = open('/content/overlap_and_chromID.gtf')
+
+count1=0
+for cline in lncrna_overlapc:
+  if 'Tb927_01_v5.1' in cline:
+    count1+=1
+print(count1)
